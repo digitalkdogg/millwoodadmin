@@ -1,0 +1,9 @@
+CREATE TABLE `wp_sessions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `session_id` varchar(38) NOT NULL,
+  `last_updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `expire_date` datetime NOT NULL,
+  `secure` varchar(5) DEFAULT 'false',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `session_id_UNIQUE` (`session_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;

@@ -1,0 +1,14 @@
+[
+	"server",
+	"username",
+	"password",
+	"database",
+	"client_id",
+	"appkey",
+	"redirect_uri",
+	"base_url",
+	"auth_mehtod",
+	"response_type",
+	"scope",
+	"pin"
+]

@@ -1,0 +1,17 @@
+<div id = "btn-wrap">
+	<div class = "row">
+		<div class = "col-lg-3 col-md-6 col-sm-12 col" >
+		<button class = "btn btn-success" id = "login-cc">Login to <br />Constant Contact</button>
+		</div>
+		<div class = "col-lg-3 col-md-6 col-sm-12 col">
+		<button class = "btn btn-success" id = "get-campaigns">Get Constant Contact <br /> News letters</button>
+		</div>
+		<div class = "col-lg-3 col-md-6 col-sm-12 col">
+		<button class = "btn btn-success" id = "save-to-db">Save To Website</button>
+		</div>
+		<div class = "col-lg-3 col-md-6 col-sm-12 col">
+		<button class = "btn btn-success" id = "reload">Reload</button>
+		</div>
+		<div id = "status"></div>
+	</div>
+</div>

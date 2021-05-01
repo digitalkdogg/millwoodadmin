@@ -1,0 +1,15 @@
+CREATE TABLE `wp_campaigns` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cc_id` varchar(155) NOT NULL,
+  `title` varchar(75) NOT NULL,
+  `created_at` varchar(30) DEFAULT NULL,
+  `status` varchar(10) DEFAULT NULL,
+  `last_updated` varchar(45) DEFAULT NULL,
+  `acc_id` varchar(155) DEFAULT NULL,
+  `permalink_url` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cc_id_UNIQUE` (`cc_id`),
+  UNIQUE KEY `acc_id_UNIQUE` (`acc_id`),
+  UNIQUE KEY `permalink_url_UNIQUE` (`permalink_url`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+

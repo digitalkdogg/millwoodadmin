@@ -1,0 +1,5 @@
+Options -Indexes
+AuthType Basic
+AuthName "env"
+AuthUserFile "/home2/simpliq8/.htpasswds/public_html/millwoodchurchnwa/millwoodadmin/env/passwd"
+require valid-user

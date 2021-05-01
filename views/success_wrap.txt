@@ -1,0 +1,39 @@
+<div id = "success-wrap">
+	<div id = "cc-campaigns" class="panel panel-default">
+		<div class = "panel-heading">
+			<p class = 'title'>From Constant Contacts</p>
+			<div class = "col-lg-5 col">Title</div>
+			<div class = "col-lg-2 col">Status</div>
+			<div class = "col-lg-2 col">Updated On</div>
+			<div class = "col-lg-2 col"></div>
+		</div>
+		<div class ="panel-body cc-campaigns">
+			<div id = "loader-wrap" class = "hidden">
+				<div class = "loader"></div>
+			</div>
+			<div id = "result-wrap"></div>
+		</div>
+  	</div>
+	<div id = "temp-campaigns" class = "panel panel-default">
+		<div class = "panel-heading"><p class = "title">To Be Add To Website</p>
+			<div class = "col-lg-5 col">Title</div>
+			<div class = "col-lg-2 col">Status</div>
+			<div class = "col-lg-2 col">Updated On</div>
+			<div class = "col-lg-2 col"></div>
+		</div>
+		<div class = "panel-body temp-campaigns header"></div>
+	</div>
+	<div id = "db-campaigns" class = "panel panel-default">
+		<div class = "panel-heading">
+		<p class = "title">From the Website</p>
+		<div class = "col-lg-4 col">Title</div>
+		<div class = "col-lg-1 col">Status</div>
+		<div class = "col-lg-2 col">Created On</div>
+		<div class = "col-lg-2 col">Last Updated</div>
+		<div class = "col-lg-2 col"></div>
+		</div>
+		<div class = "header panel-body db-campaigns"></div>
+	</div>
+
+	
+</div>

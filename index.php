@@ -16,7 +16,7 @@
     <script type="application/javascript" src="assets/jQuery-3.4.1.js"></script>
     <script src="assets/bootstrap.min.js"></script>
     <script src = "assets/cookie.js"></script>
-    <script type="application/javascript" src = "assets/admin_js.js"></script>
+    <script type="application/javascript" src = "assets/adminjs.js"></script>
 
 </head>
 

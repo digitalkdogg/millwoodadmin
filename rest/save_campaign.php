@@ -26,7 +26,8 @@
 		    		'created_at' => $input['created_at'],
 		    		'acc_id' => $input['campaign_activity_id'],
 		    		'permalink_url' => $input['permalink_url'],
-		    		'last_updated' => $input['updated_at']
+		    		'last_updated' => $input['updated_at'],
+		    		'content' => $input['content']
 		    	]);
 
 		    	$return = array('rowcount'=>$data->rowCount(), 'cc_id'=>$input['campaign_id']);
@@ -38,7 +39,8 @@
 		    		'created_at' => $input['created_at'],
 		    		'acc_id' => $input['campaign_activity_id'],
 		    		'permalink_url' => $input['permalink_url'],
-		    		'last_updated' => $input['updated_at']
+		    		'last_updated' => $input['updated_at'],
+		    		'content' => $input['content']
 		    	], ['cc_id'=>$input['campaign_id']]);
 		 	$return = array('rowcount'=>0, 'cc_id'=>$input['campaign_id']);
 		 } 

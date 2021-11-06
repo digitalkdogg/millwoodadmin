@@ -72,7 +72,17 @@ $(document).ready(function () {
 						data = JSON.parse(data);
 						
 						var link = $('div.panel-body.cc-campaigns .row#cc_'+id+' i.link');
+						var contentele = $('div.panel-body.cc-campaigns .row#cc_'+id+' input.content');
 						$(link).attr('data-href', data['permalink_url']);
+
+						let html = data['html_content'].replace(/\n/g,' ');
+						let parser = new DOMParser();
+						
+						 html = parser.parseFromString(html, "text/html");
+
+						 html = $(html).find('.layout-container-border').find('table').html();
+
+						$(contentele).val('<table>' + html + '</table>');
 
 						admin.utils.update_campaign_rec(admin.data.cc_campaigns.campaigns, id, data);
 					}
@@ -174,6 +184,13 @@ $(document).ready(function () {
     							}).appendTo('#success-wrap #cc-campaigns .row#cc_'+this.campaign_id)
     
     							if (this.current_status=='Done') {
+    								$('<input />', {
+    									'type': 'hidden',
+    									'class': 'content',
+    									'id': 'content',
+    									'name': 'content'
+    								}).appendTo('#success-wrap #cc-campaigns .row#cc_'+this.campaign_id)
+
     								$('<i />', {
     									'class' : 'fas fa-link link notadded',
     									'data-id': this.campaign_id,
@@ -382,6 +399,9 @@ $(document).ready(function () {
 				counter = counter + 1;
 				var html = '<div class = "row" id = "'+this.campaign_id +'"><div class = "col-lg-1 result"></div><div class = "col-lg-5">'+this.name+'</div></div>';
 				$('#myModal .modal-body').append(html)
+
+				this.content = $('#cc_'+this.campaign_id).find('input.content').val();
+
 				$.ajax({
 					'url': 'rest/save_campaign.php',
 					'type': 'POST',

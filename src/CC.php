@@ -22,8 +22,13 @@ class CC {
 	}
 
 	function getAuthURL() {
+		var_dump($this->client_id);
 
-		return $this->base_url . 'idfed?response_type='. $this->response_type . '&client_id=' . $this->client_id . '&scope='. $this->scope . '&redirect_uri=' . $this->redirect_uri;
+		return $this->base_url . '?client_id=' .$this->client_id . '&redirect_uri=' . $this->redirect_uri . '&response_type='. $this->response_type .'&scope='. $this->scope . '&state=randomState_121&nonce=randomNonce_121';
+		
+		//return 'https://authz.constantcontact.com/oauth2/default/v1/authorize?client_id=' .$this->client_id . '&redirect_uri=http://localhost/millwoodadmin&response_type=token&scope=account_read+account_update+contact_data+campaign_data+offline_access&state=randomState_121&nonce=randomNonce_121';
+		//return 'https://authz.constantcontact.com/oauth2/default/v1/authorize?client_id=06866a08-4450-4010-b8f0-545ecec14b94&redirect_uri=http://localhost/millwoodadmin&response_type=token&scope=account_read+account_update+contact_data+campaign_data+offline_access&state=randomState_121&nonce=randomNonce_121';
+		//return $this->base_url . '?response_type='. $this->response_type . '&client_id=' . $this->client_id . '&scope='. $this->scope . '&redirect_uri=' . $this->redirect_uri;
 	}
 
 	function getCampaigns() {

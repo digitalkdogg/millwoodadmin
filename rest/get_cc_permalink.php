@@ -6,7 +6,8 @@ require "../src/Env.php";
 $env = new Env();
 
 $curl_data = array(
-		'url' => $env->attr['base_url'] . 'emails/activities/'.$_POST['acc_id']. '?include=permalink_url,html_content',
+	    'url' => 'https://api.cc.email/v3/emails/activities/' . $_POST['acc_id']. '?include=permalink_url,html_content',
+		//'url' => $env->attr['base_url'] . 'emails/activities/'.$_POST['acc_id']. '?include=permalink_url,html_content',
 		'maxredirs'=>'10',
 		'timeout' => '30',
 		'httpheader' => array ('Accept: application/json', 'Content-type: application/json', 'Authorization: Bearer '. $_POST['access_token'])

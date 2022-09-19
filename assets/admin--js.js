@@ -91,7 +91,6 @@ $(document).ready(function () {
 			},
 			reg_login_btn: function () {			
 				$('#login #submit').click(function () {
-					console.log('hi');
 					$('status-row div#status').empty()
 					$.ajax({
 						'url':'rest/session_me.php',

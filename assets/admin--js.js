@@ -73,17 +73,23 @@ $(document).ready(function () {
 						
 						var link = $('div.panel-body.cc-campaigns .row#cc_'+id+' i.link');
 						var contentele = $('div.panel-body.cc-campaigns .row#cc_'+id+' input.content');
+					
 						$(link).attr('data-href', data['permalink_url']);
 
-						let html = data['html_content'].replace(/\n/g,' ');
+						var htmlobj = data['html_content'].replace(/\n/g,' ');
 						let parser = new DOMParser();
 						
-						 html = parser.parseFromString(html, "text/html");
+						 htmlobj = parser.parseFromString(htmlobj, "text/html");
+						 
+						 if ($(htmlobj).find('.layout-container-border').length>0) {
+						 	htmlobj = $(htmlobj).find('.layout-container-border').find('table').html();
+						 } else {
+							htmlobj = $(htmlobj).find('.shell_panel-row').find('table').html();
+						 }
 
-						 html = $(html).find('.layout-container-border').find('table').html();
+						$(contentele).val('<table>' + htmlobj + '</table>');
 
-						$(contentele).val('<table>' + html + '</table>');
-
+			
 						admin.utils.update_campaign_rec(admin.data.cc_campaigns.campaigns, id, data);
 					}
 				})

@@ -4,9 +4,14 @@
 	require "../src/Connect.php";
 	require "../src/Sessions.php";
 	require "../src/CC.php";
+	require "../src/Env.php";
+	
 
 	$access_token = $_POST['access_token'];
-	sessions::start();
+
+	$sess = new Sessions();
+
+	$sess->start();
 
 	$curl_data = array(
 	//	'url' => $_POST['base_url'] . 'emails?limit=20',

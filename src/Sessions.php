@@ -1,5 +1,6 @@
 <?php
 use Connect\Connect;
+
 class Sessions {
 	public $session_id;
 	public $last_hit='test';
@@ -31,8 +32,9 @@ class Sessions {
 			}
 		}
 
-    	echo '<script type = "application/javascript">var session_id = "'. $sess . '";</script>';
-
+		if (strpos($_SERVER['REQUEST_URI'], '/rest/') == false) {
+    		echo '<script type = "application/javascript">var session_id = "'. $sess . '";</script>';
+		}
 		$database = $this->set_db($env);
 
 		$data = $this->read_session_db($sess, $database);
@@ -57,14 +59,15 @@ class Sessions {
 					$this->secure = "false";
 				}
 			} else {
-				var_dump('i expire');
 			
 				 $this->update_session($sess, $database, $data, 'false');
 				 $this->secure = "false";
 			}
 		}
 		
-		echo ('<script type = "application/javascript">var secure = '. $this->secure .';</script>');
+		if (strpos($_SERVER['REQUEST_URI'], '/rest/') == false) {
+			echo ('<script type = "application/javascript">var secure = '. $this->secure .';</script>');
+		}
 	}
 
 	function start() {

@@ -16,7 +16,7 @@
     <script type="application/javascript" src="assets/jQuery-3.4.1.js"></script>
     <script src="assets/bootstrap.min.js"></script>
     <script src = "assets/cookie.js"></script>
-    <script type="application/javascript" src = "assets/admin--js.js"></script>
+    <script type="application/javascript" src = "assets/adminjs.js"></script>
 
 </head>
 
@@ -47,6 +47,10 @@
 	<div class = "container-fluid">
 
 		<?php $header = new View('views/header_view.txt'); ?>
+		<?php 
+			//var_dump($sess->validateToken('eyJraWQiOiJzYWNWVklQOHRFb0RkczZ2Z29HRDVTU1d4RldNenRTM21XRGVyRnBjUnNVIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULjJ3Rm9CcnNhajkwa2JYbmZJY1ZQbTJ2S0tRN25RLUEzQnpVaHVSUllzZlEiLCJpc3MiOiJodHRwczovL2lkZW50aXR5LmNvbnN0YW50Y29udGFjdC5jb20vb2F1dGgyL2F1czFsbTNyeTltRjd4MkphMGg4IiwiYXVkIjoiaHR0cHM6Ly9hcGkuY2MuZW1haWwvdjMiLCJpYXQiOjE3MTc3NzMzMjcsImV4cCI6MTcxNzgwMjEyNywiY2lkIjoiMDY4NjZhMDgtNDQ1MC00MDEwLWI4ZjAtNTQ1ZWNlYzE0Yjk0IiwidWlkIjoiMDB1MWlmY2ppYzB6c1N0QjYwaDgiLCJzY3AiOlsiY2FtcGFpZ25fZGF0YSIsImNvbnRhY3RfZGF0YSJdLCJhdXRoX3RpbWUiOjE3MTc3Njk5ODUsInN1YiI6Im1pbGx3b29kIiwicGxhdGZvcm1fdXNlcl9pZCI6Ijc3ZWY1ODhhLTU2NGUtNGY0NS05NWNhLWFiYTgwNmU4M2I4NCJ9.GfXBsalZC1-eES9nCwl2K52fP46HSMhZ4RieVKdUhZvPETwS62sRgNELgAEEzhjKXCdDRoRYUpflB2jAJlfloS6BoAjsEPNwVrSd1CTim3Ml7ilhwRDf_OCQPXh3ZOf3RLQNlCvVFCxfX3obhTT2j_vkTd5FSouUMJVOPlEa5YEzuiPmuh38cdcDAD-_tktx1m6esKppjprw8llYDnZO7DqIF3XFVruVFGKlc0S_GKSh9cMQ-k5edo6hHCeFJ2Yt3-QPAor3xdpNHDp6oorXlu8VlRSaIhj3cH4fsbkJmJ4GdLkega15O930X_yeceW_xep46t4yzwMN2GObLPBDXQ'));
+			//var_dump(base64_decode('eyJraWQiOiJzYWNWVklQOHRFb0RkczZ2Z29HRDVTU1d4RldNenRTM21XRGVyRnBjUnNVIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULjJ3Rm9CcnNhajkwa2JYbmZJY1ZQbTJ2S0tRN25RLUEzQnpVaHVSUllzZlEiLCJpc3MiOiJodHRwczovL2lkZW50aXR5LmNvbnN0YW50Y29udGFjdC5jb20vb2F1dGgyL2F1czFsbTNyeTltRjd4MkphMGg4IiwiYXVkIjoiaHR0cHM6Ly9hcGkuY2MuZW1haWwvdjMiLCJpYXQiOjE3MTc3NzMzMjcsImV4cCI6MTcxNzgwMjEyNywiY2lkIjoiMDY4NjZhMDgtNDQ1MC00MDEwLWI4ZjAtNTQ1ZWNlYzE0Yjk0IiwidWlkIjoiMDB1MWlmY2ppYzB6c1N0QjYwaDgiLCJzY3AiOlsiY2FtcGFpZ25fZGF0YSIsImNvbnRhY3RfZGF0YSJdLCJhdXRoX3RpbWUiOjE3MTc3Njk5ODUsInN1YiI6Im1pbGx3b29kIiwicGxhdGZvcm1fdXNlcl9pZCI6Ijc3ZWY1ODhhLTU2NGUtNGY0NS05NWNhLWFiYTgwNmU4M2I4NCJ9.GfXBsalZC1-eES9nCwl2K52fP46HSMhZ4RieVKdUhZvPETwS62sRgNELgAEEzhjKXCdDRoRYUpflB2jAJlfloS6BoAjsEPNwVrSd1CTim3Ml7ilhwRDf_OCQPXh3ZOf3RLQNlCvVFCxfX3obhTT2j_vkTd5FSouUMJVOPlEa5YEzuiPmuh38cdcDAD-_tktx1m6esKppjprw8llYDnZO7DqIF3XFVruVFGKlc0S_GKSh9cMQ-k5edo6hHCeFJ2Yt3-QPAor3xdpNHDp6oorXlu8VlRSaIhj3cH4fsbkJmJ4GdLkega15O930X_yeceW_xep46t4yzwMN2GObLPBDXQ'));
+		?>
 
 		<?php if ($sess->check_session() == true) { ?>
 		<div id = "body" class = "container">
@@ -86,11 +90,13 @@
 		<?php 	} ?>
 		<?php $modal = new View('views/modal.txt'); ?>
 	</div>
+	<?php if (isset($_SERVER['REQUEST_URI'])) { ?>
 	<script type = "application/javascript">
 		
 		<?php if (isset($env)) { ?>
 			var env = {<?php foreach($env->attr as $key=>$item) {echo('"' . $key . '":"' . $item . '",');} ?> };
 		<?php } ?>
 	</script>
+	<?php } ?>
 </body>
 </html>

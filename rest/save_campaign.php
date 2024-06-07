@@ -4,11 +4,12 @@
 	require '../src/Connect.php';
 
 	$input = $_POST['data'];
+	$sess = new Sessions();
 
 	$env = new Env();
 
-	$database = Sessions::set_db($env);
-	$session = Sessions::read_session_db($_POST['sessionid'], $database);
+	$database = $sess->set_db($env);
+	$session = $sess->read_session_db($_POST['sessionid'], $database);
 	if (sizeof($session)>0) {
 		$return = array('rowcount'=>'0',  'cc_id'=>$input['campaign_id']);
 		$olddata = $database->select('wp_campaigns', [

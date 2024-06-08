@@ -1,5 +1,8 @@
 <?php
 use Connect\Connect;
+use Nowakowskir\JWT\JWT;
+use Nowakowskir\JWT\TokenDecoded;
+use Nowakowskir\JWT\TokenEncoded;
 
 class Sessions {
 	public $session_id;
@@ -93,6 +96,35 @@ class Sessions {
 		return $database;
 	}
 
+	function check_jwt($token) {
+		if ($token == null) {
+			return false;
+		}
+
+		try {
+			$tokenEncoded = new TokenEncoded($token);
+		} catch (exception $e) {
+			return false;
+		}
+		$header = $tokenEncoded->decode()->getHeader();
+		$payload = $tokenEncoded->decode()->getPayload();
+		$now = date("Y-m-d H:i:s");
+		$exp = date("Y-m-d H:i:s", $payload['exp']);
+		$iat = date("Y-m-d H:i:s", $payload['iat']);
+
+		if (strlen($payload['platform_user_id'])>30) {
+			if (strpos($payload['cid'], '-')) {
+				if ($now >= $iat) {
+					if ($now < $exp) {
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
 	function check_expired($expire, $now) {
 		$now = strtotime($now->format('Y-m-d H:m:s'));
 		$expire = strtotime($expire->format('Y-m-d H:m:s'));
@@ -150,9 +182,17 @@ class Sessions {
 		}
 	}
 
-	function check_session() {
+	function check_session($token) {
 		if ($this->secure == 'true') {
-			return true;
+			try {
+				if($this->check_jwt($token)) {
+					return true;
+				} else {
+					return false;
+				}
+			} catch(exception $e) {
+				return false;
+			}
 		} else {
 			return false;
 		}

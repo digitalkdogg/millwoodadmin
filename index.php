@@ -48,29 +48,23 @@
 
 		<?php $header = new View('views/header_view.txt'); ?>
 		<?php 
-			//var_dump($sess->validateToken('eyJraWQiOiJzYWNWVklQOHRFb0RkczZ2Z29HRDVTU1d4RldNenRTM21XRGVyRnBjUnNVIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULjJ3Rm9CcnNhajkwa2JYbmZJY1ZQbTJ2S0tRN25RLUEzQnpVaHVSUllzZlEiLCJpc3MiOiJodHRwczovL2lkZW50aXR5LmNvbnN0YW50Y29udGFjdC5jb20vb2F1dGgyL2F1czFsbTNyeTltRjd4MkphMGg4IiwiYXVkIjoiaHR0cHM6Ly9hcGkuY2MuZW1haWwvdjMiLCJpYXQiOjE3MTc3NzMzMjcsImV4cCI6MTcxNzgwMjEyNywiY2lkIjoiMDY4NjZhMDgtNDQ1MC00MDEwLWI4ZjAtNTQ1ZWNlYzE0Yjk0IiwidWlkIjoiMDB1MWlmY2ppYzB6c1N0QjYwaDgiLCJzY3AiOlsiY2FtcGFpZ25fZGF0YSIsImNvbnRhY3RfZGF0YSJdLCJhdXRoX3RpbWUiOjE3MTc3Njk5ODUsInN1YiI6Im1pbGx3b29kIiwicGxhdGZvcm1fdXNlcl9pZCI6Ijc3ZWY1ODhhLTU2NGUtNGY0NS05NWNhLWFiYTgwNmU4M2I4NCJ9.GfXBsalZC1-eES9nCwl2K52fP46HSMhZ4RieVKdUhZvPETwS62sRgNELgAEEzhjKXCdDRoRYUpflB2jAJlfloS6BoAjsEPNwVrSd1CTim3Ml7ilhwRDf_OCQPXh3ZOf3RLQNlCvVFCxfX3obhTT2j_vkTd5FSouUMJVOPlEa5YEzuiPmuh38cdcDAD-_tktx1m6esKppjprw8llYDnZO7DqIF3XFVruVFGKlc0S_GKSh9cMQ-k5edo6hHCeFJ2Yt3-QPAor3xdpNHDp6oorXlu8VlRSaIhj3cH4fsbkJmJ4GdLkega15O930X_yeceW_xep46t4yzwMN2GObLPBDXQ'));
-			//var_dump(base64_decode('eyJraWQiOiJzYWNWVklQOHRFb0RkczZ2Z29HRDVTU1d4RldNenRTM21XRGVyRnBjUnNVIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULjJ3Rm9CcnNhajkwa2JYbmZJY1ZQbTJ2S0tRN25RLUEzQnpVaHVSUllzZlEiLCJpc3MiOiJodHRwczovL2lkZW50aXR5LmNvbnN0YW50Y29udGFjdC5jb20vb2F1dGgyL2F1czFsbTNyeTltRjd4MkphMGg4IiwiYXVkIjoiaHR0cHM6Ly9hcGkuY2MuZW1haWwvdjMiLCJpYXQiOjE3MTc3NzMzMjcsImV4cCI6MTcxNzgwMjEyNywiY2lkIjoiMDY4NjZhMDgtNDQ1MC00MDEwLWI4ZjAtNTQ1ZWNlYzE0Yjk0IiwidWlkIjoiMDB1MWlmY2ppYzB6c1N0QjYwaDgiLCJzY3AiOlsiY2FtcGFpZ25fZGF0YSIsImNvbnRhY3RfZGF0YSJdLCJhdXRoX3RpbWUiOjE3MTc3Njk5ODUsInN1YiI6Im1pbGx3b29kIiwicGxhdGZvcm1fdXNlcl9pZCI6Ijc3ZWY1ODhhLTU2NGUtNGY0NS05NWNhLWFiYTgwNmU4M2I4NCJ9.GfXBsalZC1-eES9nCwl2K52fP46HSMhZ4RieVKdUhZvPETwS62sRgNELgAEEzhjKXCdDRoRYUpflB2jAJlfloS6BoAjsEPNwVrSd1CTim3Ml7ilhwRDf_OCQPXh3ZOf3RLQNlCvVFCxfX3obhTT2j_vkTd5FSouUMJVOPlEa5YEzuiPmuh38cdcDAD-_tktx1m6esKppjprw8llYDnZO7DqIF3XFVruVFGKlc0S_GKSh9cMQ-k5edo6hHCeFJ2Yt3-QPAor3xdpNHDp6oorXlu8VlRSaIhj3cH4fsbkJmJ4GdLkega15O930X_yeceW_xep46t4yzwMN2GObLPBDXQ'));
+			try {
+				if (isset($_GET['access_token'])) {
+					$token = $_GET['access_token'];
+				} else {
+					$token = null;
+					$redirect = new View('views/script_redirect_url_to_hash.txt'); 
+				}
+			} catch (exception $e) { error_log($e);}
 		?>
 
-		<?php if ($sess->check_session() == true) { ?>
-		<div id = "body" class = "container">
+		<?php 
+			if ($sess->check_session($token) == false || $token == null) {
+			
+		?>
 
 
-			<div id = "button-wrap">
-				<?php 
-				if (isset($_GET['access_token'])==false) {
-					$redirect = new View('views/script_redirect_url_to_hash.txt'); 
-				} else if (isset($_GET['access_token'])) {
-					$cc->access_token= $_GET['access_token'];			
-					$campaingbtn = new View('views/get_campaign_btn_view.txt');
-					$success = new View('views/success_wrap.txt');
-				}
-				?>
-			</div>
-		</div>
-	<?php } else { ?>
-
-		<div id = "body" class = "container">
+<div id = "body" class = "container">
 			<div id = "login">
 				<div class = "row">
 					<div class = "col-lg-2"></div>
@@ -87,6 +81,29 @@
 		
 			</div>
 		</div>
+
+
+
+
+
+	
+	<?php } else { ?>
+		<div id = "body" class = "container">
+
+
+<div id = "button-wrap">
+	<?php 
+	if (isset($_GET['access_token'])==false) {
+		$redirect = new View('views/script_redirect_url_to_hash.txt'); 
+	} else if (isset($_GET['access_token'])) {
+		$cc->access_token= $_GET['access_token'];			
+		$campaingbtn = new View('views/get_campaign_btn_view.txt');
+		$success = new View('views/success_wrap.txt');
+	}
+	?>
+</div>
+</div>
+
 		<?php 	} ?>
 		<?php $modal = new View('views/modal.txt'); ?>
 	</div>
